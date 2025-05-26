@@ -1,15 +1,11 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs "NodeJS 18"
-    }
-
     environment {
         BUILD_DIR = 'build'
         REMOTE_USER = 'ubuntu'
         REMOTE_HOST = '172.31.19.76'
-        REMOTE_PATH = '/home/ubuntu/Cloud_devops'  // Your actual Nginx project path
+        REMOTE_PATH = '/home/ubuntu/Cloud_devops'  // Path on Nginx server
     }
 
     stages {
