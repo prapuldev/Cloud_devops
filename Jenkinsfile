@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+    environment {
+        NODE_OPTIONS = '--openssl-legacy-provider'
+    }
 
     stages {
         stage('Install Dependencies') {
@@ -18,10 +21,10 @@ pipeline {
 
     post {
         success {
-            echo " Deployment complete!"
+            echo "Deployment complete!"
         }
         failure {
-            echo " Deployment failed!"
+            echo "Deployment failed!"
         }
     }
 }
