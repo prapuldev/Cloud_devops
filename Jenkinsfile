@@ -2,21 +2,21 @@ pipeline {
     agent any
 
     environment {
-        BUILD_DIR = 'build'
-        REMOTE_USER = 'ubuntu'
-        REMOTE_HOST = '172.31.19.76'
-        REMOTE_PATH = '/home/ubuntu/Cloud_devops'  // Path on Nginx server
+        NODE_ENV = 'production'
     }
 
     stages {
-        stage('Clone') {
+
+        stage('Clone Repository') {
             steps {
+                // Make sure this repo is public or Jenkins has credentials set up
                 git 'https://github.com/prapuldev/Cloud_devops.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
+                // Assumes package.json is in the root of the cloned repo
                 sh 'npm install'
             }
         }
@@ -24,14 +24,6 @@ pipeline {
         stage('Build React App') {
             steps {
                 sh 'npm run build'
-            }
-        }
-
-        stage('Deploy using rsync') {
-            steps {
-                sh """
-                rsync -avz -e "ssh -o StrictHostKeyChecking=no" $BUILD_DIR/ $REMOTE_USER@$REMOTE_HOST:$REMOTE_PATH/
-                """
             }
         }
     }
