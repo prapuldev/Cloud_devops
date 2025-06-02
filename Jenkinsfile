@@ -1,10 +1,6 @@
 pipeline {
     agent any
-
-    environment {
-        NODE_OPTIONS = '--openssl-legacy-provider'
-    }
-
+    
     stages {
         stage('Install Dependencies') {
             steps {
