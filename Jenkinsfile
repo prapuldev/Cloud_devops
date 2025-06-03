@@ -17,6 +17,15 @@ pipeline {
                 sh 'npm run build'
             }
         }
+
+        stage('Deploy to Nginx Server') {
+            steps {
+                // Copy build files to nginx server using scp
+                sh '''
+                    scp -i /home/ubuntu/ssh-keys/key.pem -r build/* ubuntu@172.31.29.37:/var/www/html/
+                '''
+            }
+        }
     }
 
     post {
