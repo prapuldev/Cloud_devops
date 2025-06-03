@@ -22,7 +22,7 @@ pipeline {
             steps {
                 // Copy build files to nginx server using scp
                 sh '''
-                    rsync -avz -e 'ssh -i /home/ubuntu/ssh-keys/key.pem -o StrictHostKeyChecking=no' build/* ubuntu@172.31.29.37:/var/www/html/
+                    rsync -avz -e 'ssh -i /var/lib/jenkins/.ssh/key.pem -o StrictHostKeyChecking=no' build/* ubuntu@172.31.29.37:/var/www/html/
                 '''
             }
         }
